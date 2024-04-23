@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 function ListingPage() {
     const navigate = useNavigate()
 
-    const [team1, setTeam1] = useState(["Gino", "Dani"])
-    const [team2, setTeam2] = useState(["Nahu", "Emi", "Santy", "Dulce"])
+    const [team1] = useState(["Gino", "Dani"])
+    const [team2] = useState(["Nahu", "Emi", "Santy", "Dulce"])
 
     useEffect(() => {
 
