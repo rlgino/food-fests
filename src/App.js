@@ -3,6 +3,7 @@ import './App.css';
 import Footer from './components/footer';
 import IndexPage from "./pages";
 import ListingPage from "./pages/listing";
+import ChoicePage from "./pages/choice";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Routes>
             <Route path="/">
               <Route index element={<IndexPage />} />
+              <Route path="choice" element={<ChoicePage />} />
               <Route path="list" element={<ListingPage />} />
             </Route>
           </Routes>
