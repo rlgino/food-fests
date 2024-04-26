@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GROUP_OSEA, GROUP_TIPO, getGroup } from "../firebase/database";
+import randomEmoji from "../services/randomEmoji";
 
 function ListingPage() {
     const navigate = useNavigate()
@@ -34,20 +35,19 @@ function ListingPage() {
                     {
                         team1.map((name, i) => <tr className="bg-blue-600 border-b border-blue-400" key={i}>
                             <th scope="row" className="px-6 py-4 font-medium bg-blue-500 text-blue-50 whitespace-nowrap dark:text-blue-100">
-                                {name}
+                                {name} {randomEmoji()}
                             </th>
                             <td className="px-6 py-4">
-                                {i < team2.length ? team2[i] : ""}
+                                {i < team2.length ? `${team2[i]} ${randomEmoji()}` : ""}
                             </td>
                         </tr>)
                     }
                     {
                         team1.length < team2.length ? team2.slice(team1.length - team2.length).map((name, i) => <tr key={i} className="bg-blue-600 border-b border-blue-400">
                             <th scope="row" className="px-6 py-4 font-medium bg-blue-500 text-blue-50 whitespace-nowrap dark:text-blue-100">
-
                             </th>
                             <td className="px-6 py-4">
-                                {name}
+                                {name} {randomEmoji()}
                             </td>
                         </tr>) : <></>
                     }
