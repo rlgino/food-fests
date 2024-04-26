@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { selectGroup } from "../firebase/database";
+import { savePerson, selectGroup } from "../firebase/database";
 import { useState } from "react";
+import Modal from "../components/modal";
 
 function ChoicePage() {
     let navigate = useNavigate();
     const [name, setName] = useState("")
+    const [showPopup, setShowPopup] = useState(false)
+    const [selectedGroups, setSelectedGroups] = useState("")
 
     const goToList = () => {
         navigate("/list")
@@ -12,13 +15,19 @@ function ChoicePage() {
 
     const submitFor = e => {
         e.preventDefault()
-        console.log(Math.random())
-        selectGroup(name)
+        setShowPopup(true)
+        selectGroup().then(group => {
+            savePerson(name, group)
+            setSelectedGroups(group)
+        })
         setName("")
     }
-    
+
     return (
         <div className="main p-5">
+
+            {showPopup ? <Modal callback={() => goToList()} closeModal={() => setShowPopup(false)} group={selectedGroups} /> : <></>}
+
             <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Elegí tu bando</h1>
             <form className="max-w-sm mx-auto" onSubmit={e => submitFor(e)}>
                 <div className="mb-5">

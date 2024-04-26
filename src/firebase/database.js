@@ -6,7 +6,7 @@ const db = getDatabase(firebaseApp)
 export const GROUP_OSEA = "osea"
 export const GROUP_TIPO = "tipo"
 
-export const selectGroup = async (name) => {
+export const selectGroup = async () => {
 
     const groupsRef = ref(db, 'groups/');
     const groupOsea = await get(child(groupsRef, GROUP_OSEA))
@@ -14,9 +14,9 @@ export const selectGroup = async (name) => {
     let oseaSize = groupOsea.exists() ? groupOsea.val().length : 0
     let tipoSize = groupTipo.exists() ? groupTipo.val().length : 0
 
-    if (oseaSize - tipoSize > 1) { savePerson(name, GROUP_TIPO) }
-    else if (tipoSize - oseaSize > 1) { savePerson(name, GROUP_OSEA) }
-    else savePerson(name, Math.random() > 0.5 ? GROUP_TIPO : GROUP_OSEA)
+    if (oseaSize - tipoSize > 1) return GROUP_TIPO
+    else if (tipoSize - oseaSize > 1) return GROUP_OSEA
+    else return Math.random() > 0.5 ? GROUP_TIPO : GROUP_OSEA
 }
 
 export const savePerson = (name, group) => {
