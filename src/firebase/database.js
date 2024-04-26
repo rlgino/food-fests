@@ -3,20 +3,20 @@ import firebaseApp from "./firebase"
 
 const db = getDatabase(firebaseApp)
 
-export const GROUP_OSEA = "osea"
-export const GROUP_TIPO = "tipo"
+export const GROUP_POPULARES = "populares"
+export const GROUP_DIVINAS = "divinas"
 
 export const selectGroup = async () => {
 
     const groupsRef = ref(db, 'groups/');
-    const groupOsea = await get(child(groupsRef, GROUP_OSEA))
-    const groupTipo = await get(child(groupsRef, GROUP_TIPO))
-    let oseaSize = groupOsea.exists() ? groupOsea.val().length : 0
-    let tipoSize = groupTipo.exists() ? groupTipo.val().length : 0
+    const group1 = await get(child(groupsRef, GROUP_POPULARES))
+    const group2 = await get(child(groupsRef, GROUP_DIVINAS))
+    let group1Size = group1.exists() ? group1.val().length : 0
+    let group2Size = group2.exists() ? group2.val().length : 0
 
-    if (oseaSize - tipoSize > 1) return GROUP_TIPO
-    else if (tipoSize - oseaSize > 1) return GROUP_OSEA
-    else return Math.random() > 0.5 ? GROUP_TIPO : GROUP_OSEA
+    if (group1Size - group2Size > 1) return GROUP_DIVINAS
+    else if (group2Size - group1Size > 1) return GROUP_POPULARES
+    else return Math.random() > 0.5 ? GROUP_DIVINAS : GROUP_POPULARES
 }
 
 export const savePerson = (name, group) => {

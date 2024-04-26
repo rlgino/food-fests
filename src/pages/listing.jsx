@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GROUP_OSEA, GROUP_TIPO, getGroup } from "../firebase/database";
+import { GROUP_POPULARES, GROUP_DIVINAS, getGroup } from "../firebase/database";
 import randomEmoji from "../services/randomEmoji";
 
 function ListingPage() {
@@ -10,8 +10,8 @@ function ListingPage() {
     const [team2, setTeam2] = useState([])
 
     useEffect(() => {
-        getGroup(GROUP_OSEA).then(group => setTeam1(group))
-        getGroup(GROUP_TIPO).then(group => setTeam2(group))
+        getGroup(GROUP_POPULARES).then(group => setTeam1(group))
+        getGroup(GROUP_DIVINAS).then(group => setTeam2(group))
     }, [])
 
     const goToHome = () => {
@@ -24,10 +24,10 @@ function ListingPage() {
                 <thead className="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 dark:text-white">
                     <tr>
                         <th scope="col" className="px-6 py-3 bg-blue-500">
-                            Osea
+                            {GROUP_POPULARES}
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Tipo
+                            {GROUP_DIVINAS}
                         </th>
                     </tr>
                 </thead>
